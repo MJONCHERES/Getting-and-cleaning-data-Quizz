@@ -4,6 +4,7 @@ output: md_document
 ---
 
 
+
 ## CONTEXT
 
 One of the most exciting areas in all of data science right now is wearable computing. Companies like Fitbit, Nike, and Jawbone Up are racing to develop the most advanced algorithms to attract new users. The data used in our analysis represent data collected from the accelerometers from the Samsung Galaxy S smartphone.
@@ -30,6 +31,7 @@ Supporting documentation included in this repository:
     1. CodeBook describing the work done on data and the tidy output
     2. A R-file called run_analysis.R detailing the code used to get the tidy dataset
     3. The tidy dataset in a text file and in a csv file.
+
 
 
 ## LICENSE
