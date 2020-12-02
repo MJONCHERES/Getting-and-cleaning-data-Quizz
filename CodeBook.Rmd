@@ -1,0 +1,134 @@
+---
+title: "CodeBook"
+output: md_document
+---
+
+
+## Description of the raw material
+
+A full description is available at the site where the data was obtained:
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones 
+Here are the data for the project:
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
+
+"activity_labels.txt"                          "features.txt"                                
+"features_info.txt"                            "README.txt"                                  
+"test/Inertial Signals/body_acc_x_test.txt"    "test/Inertial Signals/body_acc_y_test.txt"   
+"test/Inertial Signals/body_acc_z_test.txt"    "test/Inertial Signals/body_gyro_x_test.txt"  
+"test/Inertial Signals/body_gyro_y_test.txt"   "test/Inertial Signals/body_gyro_z_test.txt"  
+"test/Inertial Signals/total_acc_x_test.txt"   "test/Inertial Signals/total_acc_y_test.txt"  
+"test/Inertial Signals/total_acc_z_test.txt"   "test/subject_test.txt"                       
+"test/X_test.txt"                              "test/y_test.txt"                             
+"train/Inertial Signals/body_acc_x_train.txt"  "train/Inertial Signals/body_acc_y_train.txt" 
+"train/Inertial Signals/body_acc_z_train.txt"  "train/Inertial Signals/body_gyro_x_train.txt"
+"train/Inertial Signals/body_gyro_y_train.txt" "train/Inertial Signals/body_gyro_z_train.txt"
+"train/Inertial Signals/total_acc_x_train.txt" "train/Inertial Signals/total_acc_y_train.txt"
+"train/Inertial Signals/total_acc_z_train.txt" "train/subject_train.txt"                     
+"train/X_train.txt"                             "train/y_train.txt"
+
+Description of the files available:
+* features_info.txt: Shows information about the variables used on the feature vector.
+* features.txt: List of all features.
+* activity_labels.txt: Links the class labels with their activity name.
+* train/X_train.txt: Training set.
+* train/y_train.txt: Training labels.
+* test/X_test.txt: Test set.
+* test/y_test.txt: Test labels.
+* train/subject_train.txt and test/subject_test.txt: Each row identifies the subject who performed the activity for each window sample. Their range is from 1 to 30
+* signals file with records of acceleration signals, body acceleration signals and angular velocity measures. These files will not be used in our analysis.
+
+Attribute Information
+=====================
+For each record in the dataset it is provided:
+- Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration.
+- Triaxial Angular velocity from the gyroscope.
+- A 561-feature vector with time and frequency domain variables.
+- Its activity label.
+- An identifier of the subject who carried out the experiment. 
+
+Feature Selection 
+=================
+
+The features selected for the database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
+
+Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
+
+Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). 
+
+These signals were used to estimate variables of the feature vector for each pattern:  
+'-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
+
+tBodyAcc-XYZ
+tGravityAcc-XYZ
+tBodyAccJerk-XYZ
+tBodyGyro-XYZ
+tBodyGyroJerk-XYZ
+tBodyAccMag
+tGravityAccMag
+tBodyAccJerkMag
+tBodyGyroMag
+tBodyGyroJerkMag
+fBodyAcc-XYZ
+fBodyAccJerk-XYZ
+fBodyGyro-XYZ
+fBodyAccMag
+fBodyAccJerkMag
+fBodyGyroMag
+fBodyGyroJerkMag
+
+The set of variables that were estimated from these signals are: 
+mean(): Mean value
+std(): Standard deviation
+mad(): Median absolute deviation 
+max(): Largest value in array
+min(): Smallest value in array
+sma(): Signal magnitude area
+energy(): Energy measure. Sum of the squares divided by the number of values. 
+iqr(): Interquartile range 
+entropy(): Signal entropy
+arCoeff(): Autorregresion coefficients with Burg order equal to 4
+correlation(): correlation coefficient between two signals
+maxInds(): index of the frequency component with largest magnitude
+meanFreq(): Weighted average of the frequency components to obtain a mean frequency
+skewness(): skewness of the frequency domain signal 
+kurtosis(): kurtosis of the frequency domain signal 
+bandsEnergy(): Energy of a frequency interval within the 64 bins of the FFT of each window.
+angle(): Angle between to vectors.
+
+## What we did
+
+Data were extracted on Nov 30, 2020.
+
+The folder 'Inertial SIgnals' were not used for the analysis. We used the following files:
+"test/X_test.txt" "test/y_test.txt" "test/subject_test.txt"  "train/subject_train.txt"  "train/X_train.txt" "train/y_train.txt"
+
+We then proceeded as follows:
+  1. Merge the training and the test sets to create one data set.
+      We created data tables for each file, then merged the rows of files two by two: Subject files, X files and X files.
+      Then we merged the three tables by columns, with Subject on the left side, to come up with a large dataset.
+  2. Extract only the measurements on the mean and standard deviation for each measurement.
+      From the large dataset, we subsetted the columns that contained mean and standard.
+  3. Use descriptive activity names to name the activities in the data set.
+      We renamed the variables of the corresponding column with the variables of the table Activities
+  4. Appropriately label the data set with descriptive variable names.
+      We put uppercase to Angle and Gravity to get some consistency with other columns.
+      We changed abbreviations into full names:
+      * prefix f is replaced by frequency
+      * prefix t is replaced by time
+      * Acc is replaced by Accelerometer
+      * Gyro is replaced by Gyroscope
+      * Mag is replaced by Magnitude
+      We changed BodyBody into Body
+  5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each            activity and each subject.
+      We aggregated the dataset of step 4 by subject and activity. 
+
+
+The resulting tidy dataset has 10299 observations, gathered into 180 groups (30 subjects, 6 activities). 
+It includes the average of each variable for each activity and each subject. It has 180 rows and 88 columns, including:
+      * 1 Subject column - integer (the 30 test subjects) 
+      * 1 Activity column - character, with 6 different labels: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING,               STANDING, LAYING  
+      * means and standard deviations columns for the different features described in the raw material section above.
+The first row is the header with the names of the columns.
+
+
+
